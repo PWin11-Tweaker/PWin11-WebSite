@@ -23,6 +23,7 @@
             background: radial-gradient(circle, rgba(0, 120, 212, 0.2) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.5s ease;
+            pointer-events: none; /* Prevent pseudo-element from blocking clicks */
         }
 
         .highlight-section:hover::before {

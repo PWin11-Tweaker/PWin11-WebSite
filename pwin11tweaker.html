@@ -85,6 +85,7 @@
             background: radial-gradient(circle, rgba(0, 120, 212, 0.2) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.5s ease;
+            pointer-events: none; /* Prevent pseudo-element from blocking clicks */
         }
 
         .highlight-section:hover::before {
@@ -271,7 +272,7 @@
             <div class="winui-card p-6 rounded-xl mb-8 highlight-section">
                 <h3 class="text-2xl font-semibold mb-4 winui-accent bounce-in">Контакты</h3>
                 <p class="text-left bounce-in">
-                    В Telegram-канале: <a href="https://t.me/PWin11_news" class="text-accent hover:underline">@PWin11_news</a> (на английском) и <a href="https://t.me/pwin11_news_rus" class="text-accent hover:underline">@pwin11_news_russian</a> (на русском).<br>
+                    В Telegram-канале: <a href="https://t.me/PWin11_news" class="text-accent hover:underline">@PWin11_news</a> (на английском) и <a href="https://t.me/pwin11_news_russian" class="text-accent hover:underline">@pwin11_news_russian</a> (на русском).<br>
                     Мой официальный Telegram-канал: <a href="https://t.me/ph1ncyn" class="text-accent hover:underline">@ph1ncyn</a>
                 </p>
             </div>
