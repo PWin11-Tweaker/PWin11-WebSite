@@ -6,44 +6,96 @@
     <title>PWin11 Tweaker - Оптимизация Windows 11</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="General/style.css">
+    <style>
+        /* Динамический эффект свечения для акцента */
+        .highlight-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 120, 212, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .highlight-section:hover::before {
+            opacity: 1;
+        }
+
+        /* Анимация для текста */
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .bounce-in {
+            animation: bounceIn 0.8s ease-out;
+        }
+    </style>
 </head>
 <body class="bg-gray-900 text-white font-sans">
     <!-- Навигация -->
-    <nav class="acrylic fixed top-0 w-full z-10">
+    <nav class="winui-nav fixed top-0 w-full z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold">PWin11 Tweaker</h1>
+            <h1 class="text-2xl font-bold winui-accent">PWin11</h1>
             <div class="space-x-4">
-                <a href="#home" class="hover:text-blue-400 transition-all">Главная</a>
-                <a href="pwin11tweaker_download.html" class="hover:text-blue-400 transition-all">Установка</a>
-                <a href="#contact" class="hover:text-blue-400 transition-all">Контакты</a>
+                <a href="index.html#home" class="hover:text-blue-400 transition-all winui-fade-in">Главная</a>
+                <a href="pwin11tweaker.html" class="hover:text-blue-400 transition-all winui-fade-in">Об PWin11 Tweaker</a>
+                <a href="index.html#contact" class="hover:text-blue-400 transition-all winui-fade-in">Контакты</a>
             </div>
         </div>
     </nav>
 
     <!-- Главная секция -->
     <section id="home" class="min-h-screen flex items-center justify-center">
-        <div class="text-center max-w-3xl mx-auto px-4">
-            <h2 class="text-5xl font-bold mb-6">Оптимизируйте Windows 11 с PWin11</h2>
+        <div class="text-center max-w-3xl mx-auto px-4 winui-card winui-fade-in">
+            <h2 class="text-5xl font-bold mb-6 winui-accent">Оптимизируйте Windows 11 с PWin11</h2>
             <p class="text-xl mb-8">Мощный инструмент для настройки и улучшения производительности вашей системы.</p>
-            <a href="pwin11tweaker.html" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all">Узнать об PWin11 Tweaker</a>
+            <a href="pwin11tweaker.html" class="winui-button winui-fade-in">Узнать об PWin11 Tweaker</a>
+        </div>
+    </section>
+
+    <!-- Секция "Об линейке проектов PWin11" -->
+    <section id="about-pwin11" class="min-h-screen flex items-center justify-center py-16">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 winui-card highlight-section">
+            <h2 class="text-3xl font-bold mb-8 text-center winui-accent bounce-in">О линейке проектов PWin11</h2>
+            <p class="text-center mb-6 bounce-in">
+                Проекты PWin11 созданы для оптимизации и настройки Windows 11. Мы придерживаемся принципа Open Source: никаких платных Pro-версий или скрытых функций. PWin11 разрабатывается одним человеком, поэтому обновления могут выходить с небольшой задержкой — от 3 дней до недели. Я тщательно тестирую каждый твик перед релизом. Пре-релизы включают изменения, которые могут не попасть в основную версию и иногда вызывать проблемы, поэтому для стабильной работы рекомендую устанавливать основной релиз.
+            </p>
         </div>
     </section>
 
     <!-- Секция контактов -->
     <section id="contact" class="py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold mb-8 text-center">Связаться с нами</h2>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 winui-card">
+            <h2 class="text-3xl font-bold mb-8 text-center winui-accent">Связаться с нами</h2>
             <p class="text-center mb-6">Есть вопросы или предложения? Присоединяйтесь к нашему сообществу!</p>
             <div class="flex justify-center space-x-4">
-                <a href="https://github.com/PWin11-Tweaker/PWin11-Tweaker" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-all">GitHub</a>
-                <a href="https://t.me/ph1ncyn" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-all">Telegram</a>
+                <a href="https://github.com/PWin11-Tweaker/PWin11-Tweaker" class="winui-button">GitHub</a>
+                <a href="https://t.me/ph1ncyn" class="winui-button">Telegram</a>
             </div>
         </div>
     </section>
 
     <!-- Футер -->
-    <footer class="py-6 bg-gray-900 text-center">
-        <p>© 2025 PWin11 Tweaker. Все права защищены.</p>
+    <footer class="py-6 bg-gray-900 text-center winui-nav">
+        <p class="winui-fade-in">© 2025 PWin11 Tweaker. Все права защищены.</p>
     </footer>
 </body>
 </html>

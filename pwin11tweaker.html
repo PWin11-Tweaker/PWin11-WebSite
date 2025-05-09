@@ -5,40 +5,227 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PWin11 Tweaker - Информация</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
-    <!-- Подключаем Three.js и GLTFLoader -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/GLTFLoader.js"></script>
+    <link rel="stylesheet" href="General/style.css">
+    <style>
+        .particle {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.9) 0%, rgba(59, 130, 246, 0) 70%);
+            filter: blur(15px);
+            animation: pulse 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* WinUI 3 стили */
+        .winui-card {
+            background: #1f1f1f;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .winui-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .winui-button {
+            background: #0078D4;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .winui-button:hover {
+            background: #005BB5;
+            transform: scale(1.05);
+        }
+
+        .winui-nav {
+            background: #252525;
+            border-bottom: 1px solid #333;
+        }
+
+        .winui-accent {
+            color: #0078D4;
+        }
+
+        @keyframes winui-fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .winui-fade-in {
+            animation: winui-fadeIn 0.3s ease-in-out;
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-900 text-white font-sans relative overflow-x-hidden">
+    <!-- Светлячки как HTML-элементы -->
+    <div id="particle-container" class="absolute top-0 left-0 w-full h-full z-0"></div>
+
     <!-- Навигация -->
-    <nav class="acrylic fixed top-0 w-full z-10">
+    <nav class="winui-nav fixed top-0 w-full z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold">PWin11 Tweaker</h1>
+            <h1 class="text-2xl font-bold winui-accent">PWin11</h1>
             <div class="space-x-4">
-                <a href="index.html#home" class="hover:text-blue-400 transition-all">Главная</a>
-                <a href="pwin11tweaker.html" class="hover:text-blue-400 transition-all">О PWin11 Tweaker</a>
-                <a href="pwin11tweaker_download.html" class="hover:text-blue-400 transition-all">Установка</a>
-                <a href="index.html#contact" class="hover:text-blue-400 transition-all">Контакты</a>
+                <a href="index.html#home" class="hover:text-blue-400 transition-all winui-fade-in">Главная</a>
+                <a href="pwin11tweaker.html" class="hover:text-blue-400 transition-all winui-fade-in">О PWin11 Tweaker</a>
+                <a href="pwin11tweaker_download.html" class="hover:text-blue-400 transition-all winui-fade-in">Установка</a>
+                <a href="index.html#contact" class="hover:text-blue-400 transition-all winui-fade-in">Контакты</a>
             </div>
         </div>
     </nav>
 
-    <!-- Главная секция с логотипом -->
-    <section id="info" class="min-h-screen flex items-center justify-center py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div id="logo-container" class="w-full h-64 mb-8"></div>
-            <h2 class="text-4xl font-bold mb-6">О PWin11 Tweaker</h2>
-            <p class="text-xl mb-8 max-w-3xl mx-auto">
-                PWin11 Tweaker — это мощный инструмент для оптимизации и настройки Windows 11. С его помощью вы можете улучшить производительность системы, настроить интерфейс и применить множество твиков для повышения конфиденциальности и удобства использования. Наш инструмент регулярно обновляется, чтобы поддерживать последние версии Windows 11.
-            </p>
-            <a href="pwin11tweaker_download.html" class="download-btn download-btn-release mx-auto">Попробовать PWin11 Tweaker</a>
+    <!-- Главная секция -->
+    <section id="info" class="min-h-screen flex items-center justify-center py-16 relative z-1">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <img src="https://github.com/PWin11-Tweaker/PWin11-Tweaker/blob/main/PWin11%20Tweaker's/Assets/new-logo-1.0.11-png-version.png?raw=true" alt="Logo" class="w-20 h-20 mx-auto mb-4 rounded-full winui-fade-in">
+            <h2 class="text-4xl font-bold mb-6 winui-accent winui-fade-in">PWin11 Tweaker</h2>
+            <p class="text-xl mb-8 winui-fade-in">Твикер для операционной системы: Windows 11</p>
+            <div class="flex justify-center space-x-4 mb-12">
+                <a href="https://github.com/PWin11-Tweaker/PWin11-Tweaker/tree/main/readme" class="winui-button winui-fade-in">Ознакомьтесь с документами</a>
+                <a href="https://github.com/PWin11-Tweaker/PWin11-Tweaker/issues/new?labels=bug&template=bug-report---.md" class="winui-button winui-fade-in">Сообщить об ошибке</a>
+                <a href="pwin11tweaker_download.html" class="winui-button winui-fade-in">Последний выпуск</a>
+            </div>
+
+            <!-- Getting Started -->
+            <div class="winui-card p-6 rounded-xl mb-8 winui-fade-in">
+                <h3 class="text-2xl font-semibold mb-4 winui-accent">Начало работы</h3>
+                <ol class="text-left list-decimal list-inside space-y-2">
+                    <li>Загрузка: Скопируйте репозиторий или загрузите последнюю версию со страницы GitHub.</li>
+                    <li>Установка: Убедитесь, что у вас установлены зависимости .NET и WinUI 3, затем запустите приложение.</li>
+                    <li>Запуск от имени администратора: Для получения полной функциональности щелкните правой кнопкой мыши и выберите "Запуск от имени администратора".</li>
+                    <li>Обзор: Перейдите по меню, чтобы получить доступ к параметрам оптимизации, очистки и настройки.</li>
+                </ol>
+            </div>
+
+            <!-- О проекте -->
+            <div class="winui-card p-6 rounded-xl mb-8 winui-fade-in">
+                <h3 class="text-2xl font-semibold mb-4 winui-accent">О проекте</h3>
+                <img src="https://github.com/PWin11-Tweaker/PWin11-Tweaker/blob/main/img/screenshot.png?raw=true" alt="Tweaker Screenshot" class="w-full h-auto rounded-lg mb-4">
+                <p class="text-left">
+                    PWin11 Tweaker - это легкая утилита с открытым исходным кодом, которая позволяет вам настраивать различные аспекты Windows 11, не вникая в сложные системные настройки или стороннее программное обеспечение. Этот инструмент, ориентированный на оптимизацию производительности, очистку системы, защиту конфиденциальности и настройку интерфейса, упрощает процесс адаптации вашей операционной системы к вашим конкретным потребностям. Интуитивно понятная навигация и адаптивный дизайн делают его доступным для всех, а расширенные возможности - для технических энтузиастов.
+                </p>
+            </div>
+
+            <!-- Key Features -->
+            <div class="winui-card p-6 rounded-xl mb-8 winui-fade-in">
+                <h3 class="text-2xl font-semibold mb-4 winui-accent">Основные функции</h3>
+                <ul class="text-left list-disc list-inside space-y-2">
+                    <li>Оптимизация системы: Повысьте производительность вашей системы, изменив такие параметры, как программы запуска, фоновые процессы и визуальные эффекты.</li>
+                    <li>Защита конфиденциальности: Контролируйте свои данные, отключая телеметрию, очищая историю действий и управляя службами определения местоположения.</li>
+                    <li>Настройка интерфейса: Персонализируйте внешний вид Windows 11, переключая темы, настраивая панель задач и многое другое.</li>
+                    <li>Temp Cleaner: Безопасно удаляйте временные файлы, содержимое корзины, кэш браузера и остатки обновлений Windows, чтобы освободить место на диске.</li>
+                    <li>Усовершенствования в проводнике: Настройка поведения проводника, включение скрытых функций и повышение эффективности навигации.</li>
+                    <li>Настройка производительности: Оптимизируйте производительность в играх, планы энергопотребления и использование памяти несколькими щелчками мыши.</li>
+                    <li>Удобная навигация: Плавное переключение между страницами настроек с помощью современного интерфейса NavigationView с плавной детализированной анимацией.</li>
+                    <li>Оповещение администратора: Предупреждает вас, если приложение запущено без прав администратора, обеспечивая полный доступ к настройкам системы.</li>
+                </ul>
+            </div>
+
+            <!-- System Requirements -->
+            <div class="winui-card p-6 rounded-xl mb-8 winui-fade-in">
+                <h3 class="text-2xl font-semibold mb-4 winui-accent">Системные требования</h3>
+                <ul class="text-left list-disc list-inside space-y-2">
+                    <li>Операционная система: Windows 11 (64-разрядная версия)</li>
+                    <li>Платформа: .NET 9.0</li>
+                    <li>Разрешения: Рекомендуется права администратора</li>
+                </ul>
+            </div>
+
+            <!-- Contributing -->
+            <div class="winui-card p-6 rounded-xl mb-8 winui-fade-in">
+                <h3 class="text-2xl font-semibold mb-4 winui-accent">Внесение вклада</h3>
+                <p class="text-left">
+                    Мы приветствуем вклады! Будь то сообщение об ошибке, запрос функции или улучшение кода, не стесняйтесь открывать проблему или отправлять запрос на обновление. Ознакомьтесь с нашими рекомендациями по внесению вклада для получения более подробной информации.
+                </p>
+            </div>
+
+            <!-- License -->
+            <div class="winui-card p-6 rounded-xl mb-8 winui-fade-in">
+                <h3 class="text-2xl font-semibold mb-4 winui-accent">Лицензия</h3>
+                <p class="text-left">
+                    Распространяется по лицензии MIT. См. <a href="https://github.com/PWin11-Tweaker/PWin11-Tweaker/blob/main/LICENSE" class="text-accent hover:underline">MIT License</a> для получения дополнительной информации.
+                </p>
+            </div>
+
+            <!-- Contact -->
+            <div class="winui-card p-6 rounded-xl mb-8 winui-fade-in">
+                <h3 class="text-2xl font-semibold mb-4 winui-accent">Контакты</h3>
+                <p class="text-left">
+                    В Telegram-канале: <a href="https://t.me/PWin11_news" class="text-accent hover:underline">@PWin11_news</a> (на английском) и <a href="https://t.me/pwin11_news_rus" class="text-accent hover:underline">@pwin11_news_russian</a> (на русском).<br>
+                    Мой официальный Telegram-канал: <a href="https://t.me/ph1ncyn" class="text-accent hover:underline">@ph1ncyn</a>
+                </p>
+            </div>
+
+            <!-- Versions -->
+            <div class="winui-card p-6 rounded-xl mb-8 winui-fade-in">
+                <h3 class="text-2xl font-semibold mb-4 winui-accent">Версии</h3>
+                <p class="text-left">
+                    Если X.0-9.X.0-9, то это подверсия.<br>
+                    Это уже основная версия: 1-9,X,1-9,X.<br>
+                    <strong>docs:</strong> Это означает, что были внесены изменения в документацию или в файлы Readme.<br>
+                    <strong>fix:</strong> Означает, что были обновления без указания версии, но быстрое исправление ошибки, которая была в проекте, будет во вложенном выпуске.<br>
+                    X.X.X.X-1-9: Это означает, сколько изменений было в версии.
+                </p>
+            </div>
         </div>
     </section>
 
     <!-- Футер -->
-    <footer class="py-6 bg-gray-900 text-center">
-        <p>© 2025 PWin11 Tweaker. Все права защищены.</p>
+    <footer class="py-6 bg-gray-900 text-center relative z-1 winui-nav">
+        <p class="winui-fade-in">© 2025 PWin11 Tweaker. Все права защищены.</p>
     </footer>
+
+    <!-- Скрипт для анимации светлячков -->
+    <script>
+        const container = document.getElementById('particle-container');
+        const particleCount = 4;
+
+        // Создание частиц
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            container.appendChild(particle);
+        }
+
+        // Обновление позиций при прокрутке
+        let lastScrollY = window.scrollY;
+        function updateParticles() {
+            const scrollY = window.scrollY;
+            const deltaY = scrollY - lastScrollY;
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach(particle => {
+                let top = parseFloat(particle.style.top) + (deltaY * 0.1);
+                top = (top + 100) % 100; // Циклическое движение по высоте
+                particle.style.top = `${top}vh`;
+            });
+            lastScrollY = scrollY;
+            requestAnimationFrame(updateParticles);
+        }
+        updateParticles();
+
+        // Адаптивность
+        window.addEventListener('resize', () => {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach(particle => {
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+            });
+        });
+    </script>
 </body>
 </html>
