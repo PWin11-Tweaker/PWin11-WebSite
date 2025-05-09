@@ -224,3 +224,35 @@ section, nav, footer {
     position: relative;
     z-index: 1;
 }
+
+/* Адаптивные стили */
+@media (max-width: 640px) {
+    .winui-card {
+        padding: 12px;
+    }
+
+    .winui-button {
+        padding: 6px 12px;
+        font-size: 0.875rem;
+    }
+
+    .release-card {
+        min-height: 300px;
+        padding-bottom: 60px;
+    }
+
+    .image-container img {
+        max-height: 150px;
+    }
+
+    .download-btn, .github-btn {
+        padding: 6px 12px;
+        font-size: 0.875rem;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+}

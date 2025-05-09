@@ -47,6 +47,57 @@
         .bounce-in {
             animation: bounceIn 0.8s ease-out;
         }
+
+        /* Адаптивные стили */
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: #252525;
+                width: 100%;
+                padding: 1rem;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .burger-menu {
+                display: block;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            p.text-xl {
+                font-size: 1rem;
+            }
+
+            .winui-card {
+                padding: 12px;
+            }
+
+            .winui-button {
+                padding: 6px 12px;
+                font-size: 0.875rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-white font-sans">
@@ -54,7 +105,8 @@
     <nav class="winui-nav fixed top-0 w-full z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold winui-accent">PWin11</h1>
-            <div class="space-x-4">
+            <div class="burger-menu">☰</div>
+            <div class="nav-links space-x-4">
                 <a href="index.html#home" class="hover:text-blue-400 transition-all winui-fade-in">Главная</a>
                 <a href="pwin11tweaker.html" class="hover:text-blue-400 transition-all winui-fade-in">Об PWin11 Tweaker</a>
                 <a href="index.html#contact" class="hover:text-blue-400 transition-all winui-fade-in">Контакты</a>
@@ -97,5 +149,14 @@
     <footer class="py-6 bg-gray-900 text-center winui-nav">
         <p class="winui-fade-in">© 2025 PWin11 Tweaker. Все права защищены.</p>
     </footer>
+
+    <script>
+        const burgerMenu = document.querySelector('.burger-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        burgerMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
