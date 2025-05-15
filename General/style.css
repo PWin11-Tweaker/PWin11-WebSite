@@ -10,7 +10,7 @@
 /* WinUI 3 дополнительные стили */
 .winui-card {
     background: #1f1f1f77;
-    border-radius: 8px;
+    border-radius: 18px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 16px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -205,12 +205,6 @@ section, footer {
 
 h2, h3, p, ul, ol {
     animation: slideIn 0.8s ease-in-out;
-}
-
-/* Скругления и тени для изображений */
-img {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Фон страницы */
