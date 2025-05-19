@@ -54,6 +54,7 @@
         .winui-nav {
             background: #25252580;
             border-bottom: 1px solid #33333398;
+            height: 60px; /* Фиксированная высота для точности */
         }
 
         .winui-accent {
@@ -126,11 +127,12 @@
         /* Стили для панели навигации по секциям */
         .section-nav {
             position: fixed;
-            top: 69px;
+            top: 60px;
             width: 100%;
+            background: #25252580;
             z-index: 9;
-            padding: 5px 5;
-            background-color: #25252580;
+            padding: 5px 0;
+            height: 40px; /* Фиксированная высота для точности */
         }
 
         .section-nav-container {
@@ -181,6 +183,11 @@
 
         .back-to-top:hover {
             background: #005BB5;
+        }
+
+        /* Смещение для секций */
+        [id] {
+            scroll-margin-top: 110px; /* Увеличено до 110px для точности */
         }
 
         /* Адаптивность */
@@ -237,7 +244,6 @@
                 filter: blur(10px);
             }
 
-            /* Панель навигации по секциям для мобильных */
             .section-nav .nav-items {
                 display: none;
             }
@@ -292,7 +298,7 @@
     <!-- Панель навигации по секциям -->
     <div class="section-nav">
         <div class="section-nav-container">
-            <select onchange="document.getElementById(this.value).scrollIntoView({ behavior: 'smooth' })">
+            <select onchange="scrollToSection(this.value)">
                 <option value="">Перейти к...</option>
                 <option value="getting-started">Начало работы</option>
                 <option value="about-project">О проекте</option>
@@ -304,14 +310,14 @@
                 <option value="versions">Версии</option>
             </select>
             <div class="nav-items">
-                <a href="#getting-started" onclick="event.preventDefault(); document.getElementById('getting-started').scrollIntoView({ behavior: 'smooth' })">Начало работы</a>
-                <a href="#about-project" onclick="event.preventDefault(); document.getElementById('about-project').scrollIntoView({ behavior: 'smooth' })">О проекте</a>
-                <a href="#key-features" onclick="event.preventDefault(); document.getElementById('key-features').scrollIntoView({ behavior: 'smooth' })">Основные функции</a>
-                <a href="#system-requirements" onclick="event.preventDefault(); document.getElementById('system-requirements').scrollIntoView({ behavior: 'smooth' })">Системные требования</a>
-                <a href="#contributing" onclick="event.preventDefault(); document.getElementById('contributing').scrollIntoView({ behavior: 'smooth' })">Внесение вклада</a>
-                <a href="#license" onclick="event.preventDefault(); document.getElementById('license').scrollIntoView({ behavior: 'smooth' })">Лицензия</a>
-                <a href="#contact" onclick="event.preventDefault(); document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Контакты</a>
-                <a href="#versions" onclick="event.preventDefault(); document.getElementById('versions').scrollIntoView({ behavior: 'smooth' })">Версии</a>
+                <a href="#getting-started" onclick="event.preventDefault(); scrollToSection('getting-started')">Начало работы</a>
+                <a href="#about-project" onclick="event.preventDefault(); scrollToSection('about-project')">О проекте</a>
+                <a href="#key-features" onclick="event.preventDefault(); scrollToSection('key-features')">Основные функции</a>
+                <a href="#system-requirements" onclick="event.preventDefault(); scrollToSection('system-requirements')">Системные требования</a>
+                <a href="#contributing" onclick="event.preventDefault(); scrollToSection('contributing')">Внесение вклада</a>
+                <a href="#license" onclick="event.preventDefault(); scrollToSection('license')">Лицензия</a>
+                <a href="#contact" onclick="event.preventDefault(); scrollToSection('contact')">Контакты</a>
+                <a href="#versions" onclick="event.preventDefault(); scrollToSection('versions')">Версии</a>
             </div>
         </div>
     </div>
@@ -472,6 +478,20 @@
                 backToTopButton.style.display = 'none';
             }
         });
+
+        // Функция для прокрутки с корректировкой
+        function scrollToSection(sectionId) {
+            if (sectionId) {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    // Дополнительная корректировка после прокрутки
+                    setTimeout(() => {
+                        window.scrollBy({ top: -110, behavior: 'smooth' });
+                    }, 500);
+                }
+            }
+        }
     </script>
 </body>
 </html>
