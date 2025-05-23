@@ -6,6 +6,7 @@
     <title>PWin11 Tweaker - Информация</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="General/style.css">
+        <link rel="icon" type="image/x-icon" href="General/logo.ico">
     <style>
         .particle {
             position: absolute;
@@ -24,7 +25,6 @@
             100% { transform: scale(1); }
         }
 
-        /* WinUI 3 стили */
         .winui-card {
             background: #1f1f1f;
             border-radius: 8px;
@@ -54,7 +54,7 @@
         .winui-nav {
             background: #25252580;
             border-bottom: 1px solid #33333398;
-            height: 60px; /* Фиксированная высота для точности */
+            height: 60px;
         }
 
         .winui-accent {
@@ -70,7 +70,6 @@
             animation: winui-fadeIn 0.3s ease-in-out;
         }
 
-        /* Динамический эффект свечения для акцента */
         .highlight-section {
             position: relative;
             overflow: hidden;
@@ -93,26 +92,16 @@
             opacity: 1;
         }
 
-        /* Анимация для текста */
         @keyframes bounceIn {
-            0% {
-                transform: scale(0.95);
-                opacity: 0;
-            }
-            60% {
-                transform: scale(1.05);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(0.95); opacity: 0; }
+            60% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
         }
 
         .bounce-in {
             animation: bounceIn 0.8s ease-out;
         }
 
-        /* Адаптивные стили для основной навигации */
         .nav-links {
             display: flex;
             gap: 1rem;
@@ -124,7 +113,6 @@
             font-size: 1.5rem;
         }
 
-        /* Стили для панели навигации по секциям */
         .section-nav {
             position: fixed;
             top: 60px;
@@ -132,7 +120,7 @@
             background: #25252580;
             z-index: 9;
             padding: 5px 0;
-            height: 40px; /* Фиксированная высота для точности */
+            height: 40px;
         }
 
         .section-nav-container {
@@ -159,14 +147,18 @@
             font-size: 0.9rem;
             padding: 6px 12px;
             border-radius: 4px;
-            transition: background 0.2s ease;
+            transition: background 0.2s ease, color 0.2s ease;
         }
 
         .section-nav a:hover {
             background: #0078D4;
         }
 
-        /* Кнопка "Вернуться наверх" */
+        .section-nav a.active {
+            background: #0078D4;
+            color: white;
+        }
+
         .back-to-top {
             position: fixed;
             bottom: 20px;
@@ -185,12 +177,10 @@
             background: #005BB5;
         }
 
-        /* Смещение для секций */
         [id] {
-            scroll-margin-top: 110px; /* Увеличено до 110px для точности */
+            scroll-margin-top: 110px;
         }
 
-        /* Адаптивность */
         @media (max-width: 640px) {
             .nav-links {
                 display: none;
@@ -279,10 +269,8 @@
     </style>
 </head>
 <body class="bg-gray-900 text-white font-sans relative overflow-x-hidden">
-    <!-- Светлячки как HTML-элементы -->
     <div id="particle-container" class="absolute top-0 left-0 w-full h-full z-0"></div>
 
-    <!-- Навигация -->
     <nav class="winui-nav fixed top-0 w-full z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold winui-accent">PWin11</h1>
@@ -295,7 +283,6 @@
         </div>
     </nav>
 
-    <!-- Панель навигации по секциям -->
     <div class="section-nav">
         <div class="section-nav-container">
             <select onchange="scrollToSection(this.value)">
@@ -310,19 +297,18 @@
                 <option value="versions">Версии</option>
             </select>
             <div class="nav-items">
-                <a href="#getting-started" onclick="event.preventDefault(); scrollToSection('getting-started')">Начало работы</a>
-                <a href="#about-project" onclick="event.preventDefault(); scrollToSection('about-project')">О проекте</a>
-                <a href="#key-features" onclick="event.preventDefault(); scrollToSection('key-features')">Основные функции</a>
-                <a href="#system-requirements" onclick="event.preventDefault(); scrollToSection('system-requirements')">Системные требования</a>
-                <a href="#contributing" onclick="event.preventDefault(); scrollToSection('contributing')">Внесение вклада</a>
-                <a href="#license" onclick="event.preventDefault(); scrollToSection('license')">Лицензия</a>
-                <a href="#contact" onclick="event.preventDefault(); scrollToSection('contact')">Контакты</a>
-                <a href="#versions" onclick="event.preventDefault(); scrollToSection('versions')">Версии</a>
+                <a href="#getting-started" data-section="getting-started" class="section-link">Начало работы</a>
+                <a href="#about-project" data-section="about-project" class="section-link">О проекте</a>
+                <a href="#key-features" data-section="key-features" class="section-link">Основные функции</a>
+                <a href="#system-requirements" data-section="system-requirements" class="section-link">Системные требования</a>
+                <a href="#contributing" data-section="contributing" class="section-link">Внесение вклада</a>
+                <a href="#license" data-section="license" class="section-link">Лицензия</a>
+                <a href="#contact" data-section="contact" class="section-link">Контакты</a>
+                <a href="#versions" data-section="versions" class="section-link">Версии</a>
             </div>
         </div>
     </div>
 
-    <!-- Главная секция -->
     <section id="info" class="py-16 relative z-1" style="padding-top: 120px;">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <img src="https://github.com/PWin11-Tweaker/PWin11-Tweaker/blob/main/PWin11%20Tweaker's/Assets/new-logo-1.0.11-png-version.png?raw=true" alt="Logo" class="w-20 h-20 mx-auto mb-4 winui-fade-in">
@@ -334,7 +320,6 @@
                 <a href="pwin11tweaker_download.html" class="winui-button winui-fade-in">Последний выпуск</a>
             </div>
 
-            <!-- Getting Started -->
             <div id="getting-started" class="winui-card p-6 rounded-xl mb-8 highlight-section">
                 <h3 class="text-2xl font-semibold mb-4 winui-accent bounce-in">Начало работы</h3>
                 <ol class="text-left list-decimal list-inside space-y-2 bounce-in">
@@ -345,7 +330,6 @@
                 </ol>
             </div>
 
-            <!-- О проекте -->
             <div id="about-project" class="winui-card p-6 rounded-xl mb-8 highlight-section">
                 <h3 class="text-2xl font-semibold mb-4 winui-accent bounce-in">О проекте</h3>
                 <img src="https://github.com/PWin11-Tweaker/PWin11-Tweaker/blob/main/img/screenshot.png?raw=true" alt="Tweaker Screenshot" class="w-full h-auto rounded-lg mb-4 bounce-in">
@@ -354,7 +338,6 @@
                 </p>
             </div>
 
-            <!-- Key Features -->
             <div id="key-features" class="winui-card p-6 rounded-xl mb-8 highlight-section">
                 <h3 class="text-2xl font-semibold mb-4 winui-accent bounce-in">Основные функции</h3>
                 <ul class="text-left list-disc list-inside space-y-2 bounce-in">
@@ -369,7 +352,6 @@
                 </ul>
             </div>
 
-            <!-- System Requirements -->
             <div id="system-requirements" class="winui-card p-6 rounded-xl mb-8 highlight-section">
                 <h3 class="text-2xl font-semibold mb-4 winui-accent bounce-in">Системные требования</h3>
                 <ul class="text-left list-disc list-inside space-y-2 bounce-in">
@@ -379,7 +361,6 @@
                 </ul>
             </div>
 
-            <!-- Contributing -->
             <div id="contributing" class="winui-card p-6 rounded-xl mb-8 highlight-section">
                 <h3 class="text-2xl font-semibold mb-4 winui-accent bounce-in">Внесение вклада</h3>
                 <p class="text-left bounce-in">
@@ -387,7 +368,6 @@
                 </p>
             </div>
 
-            <!-- License -->
             <div id="license" class="winui-card p-6 rounded-xl mb-8 highlight-section">
                 <h3 class="text-2xl font-semibold mb-4 winui-accent bounce-in">Лицензия</h3>
                 <p class="text-left bounce-in">
@@ -395,7 +375,6 @@
                 </p>
             </div>
 
-            <!-- Contact -->
             <div id="contact" class="winui-card p-6 rounded-xl mb-8 highlight-section">
                 <h3 class="text-2xl font-semibold mb-4 winui-accent bounce-in">Контакты</h3>
                 <p class="text-left bounce-in">
@@ -404,7 +383,6 @@
                 </p>
             </div>
 
-            <!-- Versions -->
             <div id="versions" class="winui-card p-6 rounded-xl mb-8 highlight-section">
                 <h3 class="text-2xl font-semibold mb-4 winui-accent bounce-in">Версии</h3>
                 <p class="text-left bounce-in">
@@ -419,15 +397,13 @@
         </div>
     </section>
 
-    <!-- Кнопка "Вернуться наверх" -->
     <button class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑</button>
 
     <!-- Футер -->
-    <footer class="py-6 bg-gray-900 text-center relative z-1 winui-nav">
-        <p class="winui-fade-in">© 2025 PWin11 Tweaker. Все права защищены.</p>
+    <footer class="py-6 bg-gray-900 text-center winui-nav">
+        <p class="winui-fade-in">© 2025 ph1ncyn. Все права защищены.</p>
     </footer>
 
-    <!-- Скрипт -->
     <script>
         const container = document.getElementById('particle-container');
         const particleCount = 4;
@@ -469,7 +445,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Показ кнопки "Вернуться наверх" при прокрутке
         const backToTopButton = document.querySelector('.back-to-top');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
@@ -479,19 +454,71 @@
             }
         });
 
-        // Функция для прокрутки с корректировкой
         function scrollToSection(sectionId) {
             if (sectionId) {
                 const element = document.getElementById(sectionId);
                 if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                    // Дополнительная корректировка после прокрутки
-                    setTimeout(() => {
-                        window.scrollBy({ top: -110, behavior: 'smooth' });
-                    }, 500);
+                    const offset = 110; // Смещение для навигационных панелей
+                    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({
+                        top: elementPosition - offset,
+                        behavior: 'smooth'
+                    });
+                    // Обновление активной ссылки
+                    updateActiveLink(sectionId);
+                    // Обновление select на мобильных устройствах
+                    const select = document.querySelector('.section-nav select');
+                    if (select) {
+                        select.value = sectionId;
+                    }
                 }
             }
         }
+
+        function updateActiveLink(sectionId) {
+            const links = document.querySelectorAll('.section-link');
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === sectionId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Используем IntersectionObserver для отслеживания активной секции
+        function setupIntersectionObserver() {
+            const sections = document.querySelectorAll('.winui-card');
+            const observerOptions = {
+                root: null,
+                rootMargin: '-120px 0px 0px 0px', // Учитываем смещение навигации
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        updateActiveLink(sectionId);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            setupIntersectionObserver();
+            // Устанавливаем обработчики для ссылок
+            const links = document.querySelectorAll('.section-link');
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sectionId = link.getAttribute('data-section');
+                    scrollToSection(sectionId);
+                });
+            });
+        });
     </script>
 </body>
 </html>
